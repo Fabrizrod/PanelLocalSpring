@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <section layout:fragment="content">
+    <h1 class="page-title">Dashboard</h1>
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Total de Reservas</h3>
+        <p>120</p>
+      </div>
+      <div class="card">
+        <h3>Pagos Procesados</h3>
+        <p>S/ 2,400</p>
+      </div>
+      <div class="card">
+        <h3>Incidencias Reportadas</h3>
+        <p>5</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

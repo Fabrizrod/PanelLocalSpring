@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+  <title>Usuarios</title>
+</head>
+
+<body>
+  <section layout:fragment="content">
+    <h1 class="page-title">Gestión de Usuarios</h1>
+
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Administrador</td>
+            <td>admin@parkea.com</td>
+            <td>Admin</td>
+            <td>Activo</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Operador</td>
+            <td>operador@parkea.com</td>
+            <td>Operador</td>
+            <td>Activo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>

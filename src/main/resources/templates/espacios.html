@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+  <title>Gestión de Espacios</title>
+</head>
+
+<body>
+  <section layout:fragment="content">
+    <h1 class="page-title">Gestión de Espacios</h1>
+
+    <div class="reservas-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre del Espacio</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Espacio A1</td>
+            <td>Disponible</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Espacio A2</td>
+            <td>Ocupado</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Espacio B1</td>
+            <td>Reservado</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>

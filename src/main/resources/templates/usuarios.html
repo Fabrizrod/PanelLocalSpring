@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+  <title>Usuarios</title>
+</head>
+
+<body>
+  <section layout:fragment="content">
+    <h1 class="page-title">Gestión de Usuarios</h1>
+
+    <div class="card">
+      <form class="form">
+        <label>Nombre:</label>
+        <input type="text" placeholder="Ej: Juan Perez">
+
+        <label>Correo:</label>
+        <input type="email" placeholder="Ej: juan@gmail.com">
+
+        <label>Rol:</label>
+        <select>
+          <option>Administrador</option>
+          <option>Empleado</option>
+          <option>Cliente</option>
+        </select>
+
+        <button class="btn">Registrar Usuario</button>
+      </form>
+    </div>
+
+    <br>
+
+    <div class="usuarios-container">
+      <h2>Usuarios Registrados</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>U001</td>
+            <td>Juan Perez</td>
+            <td>juan@gmail.com</td>
+            <td>Administrador</td>
+          </tr>
+          <tr>
+            <td>U002</td>
+            <td>Maria Lopez</td>
+            <td>maria@gmail.com</td>
+            <td>Empleado</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>

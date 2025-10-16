@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+  <title>Configuración</title>
+</head>
+
+<body>
+  <section layout:fragment="content">
+    <h1 class="page-title">Configuración del Sistema</h1>
+
+    <div class="card">
+      <form class="form">
+        <label>Nombre del Estacionamiento:</label>
+        <input type="text" placeholder="Ej: Parking Central" value="Parking Local">
+
+        <label>Dirección:</label>
+        <input type="text" placeholder="Ej: Av. América Sur 1234">
+
+        <label>Teléfono de Contacto:</label>
+        <input type="text" placeholder="Ej: +51 999 888 777">
+
+        <label>Correo de Administración:</label>
+        <input type="email" placeholder="Ej: admin@parkinglocal.com">
+
+        <label>Zona Horaria:</label>
+        <select>
+          <option>GMT-5 (Perú)</option>
+          <option>GMT-4 (Bolivia)</option>
+          <option>GMT-3 (Argentina)</option>
+        </select>
+
+        <button class="btn">Guardar Cambios</button>
+      </form>
+    </div>
+
+    <br>
+
+    <div class="card">
+      <h2>Preferencias</h2>
+      <form class="form">
+        <label>Idioma del Sistema:</label>
+        <select>
+          <option>Español</option>
+          <option>Inglés</option>
+          <option>Portugués</option>
+        </select>
+
+        <label>Modo de Apariencia:</label>
+        <select>
+          <option>Claro</option>
+          <option>Oscuro</option>
+        </select>
+
+        <button class="btn">Actualizar Preferencias</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

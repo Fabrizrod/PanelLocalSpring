@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+  <title>Pagos</title>
+</head>
+
+<body>
+  <section layout:fragment="content">
+    <h1 class="page-title">Gestión de Pagos</h1>
+
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Juan Pérez</td>
+            <td>S/ 25.00</td>
+            <td>2025-10-12</td>
+            <td>Completado</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>María López</td>
+            <td>S/ 30.00</td>
+            <td>2025-10-10</td>
+            <td>Pendiente</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>

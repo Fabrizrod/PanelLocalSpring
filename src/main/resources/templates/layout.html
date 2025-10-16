@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title}">Panel Local</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div>
+      <div class="logo">
+        <div class="logo-icon">P</div>
+        <span>ParkSmart</span>
+      </div>
+
+      <nav class="menu">
+        <a th:href="@{/}" class="menu-item" th:classappend="${page == 'dashboard'} ? ' active' : ''">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a th:href="@{/reservas}" class="menu-item" th:classappend="${page == 'reservas'} ? ' active' : ''">
+          <i data-lucide="calendar-days"></i>
+          <span>Reservas</span>
+        </a>
+
+        <a th:href="@{/pagos}" class="menu-item" th:classappend="${page == 'pagos'} ? ' active' : ''">
+          <i data-lucide="wallet"></i>
+          <span>Pagos</span>
+        </a>
+
+        <a th:href="@{/reportes}" class="menu-item" th:classappend="${page == 'reportes'} ? ' active' : ''">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Reportes</span>
+        </a>
+
+        <a th:href="@{/espacios}" class="menu-item" th:classappend="${page == 'espacios'} ? ' active' : ''">
+          <i data-lucide="map-pin"></i>
+          <span>Espacios</span>
+        </a>
+
+        <a th:href="@{/incidencias}" class="menu-item" th:classappend="${page == 'incidencias'} ? ' active' : ''">
+          <i data-lucide="alert-triangle"></i>
+          <span>Incidencias</span>
+        </a>
+
+        <a th:href="@{/usuarios}" class="menu-item" th:classappend="${page == 'usuarios'} ? ' active' : ''">
+          <i data-lucide="users"></i>
+          <span>Usuarios</span>
+        </a>
+
+        <a th:href="@{/configuracion}" class="menu-item" th:classappend="${page == 'configuracion'} ? ' active' : ''">
+          <i data-lucide="settings"></i>
+          <span>Configuración</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="profile">
+      <i data-lucide="user"></i>
+      <span>Perfil</span>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="main" layout:fragment="content"></main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
