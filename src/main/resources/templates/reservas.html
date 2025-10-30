@@ -3,39 +3,75 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
-
 <head>
-  <title>Reservas</title>
+    <title>Reservas y Pagos</title>
 </head>
 
 <body>
-  <section layout:fragment="content">
-    <h1 class="page-title">Gestión de Reservas</h1>
+<section layout:fragment="content">
+    <h1 class="page-title">Reservas y Pagos</h1>
 
-    <div class="reservas-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Espacio</th>
-            <th>Hora Inicio</th>
-            <th>Hora Fin</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="reserva : ${reservas}">
-            <td th:text="${reserva.id}"></td>
-            <td th:text="${reserva.cliente}"></td>
-            <td th:text="${reserva.espacio}"></td>
-            <td th:text="${reserva.horaInicio}"></td>
-            <td th:text="${reserva.horaFin}"></td>
-            <td th:text="${reserva.estado}"></td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab active">Pendientes</button>
+        <button class="tab">Confirmadas</button>
+        <button class="tab">Canceladas</button>
     </div>
-  </section>
+
+    <!-- Reservas Pendientes -->
+    <div class="card">
+        <h2>Reservas Pendientes</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Estacionamiento</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reserva : ${reservasPendientes}">
+                    <td th:text="${'#' + reserva.id}"></td>
+                    <td th:text="${reserva.cliente}"></td>
+                    <td th:text="${reserva.espacio}"></td>
+                    <td th:text="${reserva.horaInicio}"></td>
+                    <td><span class="estado pendiente" th:text="${reserva.estado}"></span></td>
+                    <td>
+                        <button class="btn confirmar">Confirmar</button>
+                        <button class="btn cancelar">Cancelar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Historial de Pagos -->
+    <div class="card">
+        <h2>Historial de Pagos</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pago : ${pagos}">
+                    <td th:text="${pago.id}"></td>
+                    <td th:text="${pago.usuario}"></td>
+                    <td th:text="${pago.monto}"></td>
+                    <td th:text="${pago.fecha}"></td>
+                    <td><span class="estado completado" th:text="${pago.estado}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 </body>
 </html>

@@ -5,42 +5,111 @@
       layout:decorate="~{layout}">
 
 <head>
-  <title>Pagos</title>
+  <meta charset="UTF-8">
+  <title>Gestión de Pagos</title>
 </head>
 
 <body>
-  <section layout:fragment="content">
-    <h1 class="page-title">Gestión de Pagos</h1>
+<section layout:fragment="content">
+  <div class="pagos-container">
+    <h1 class="page-title">Gestión de Pagos 💳</h1>
 
-    <div class="table-container">
-      <table class="table">
+    <!-- ===== KPIs ===== -->
+    <div class="dashboard-cards">
+      <div class="dashboard-card">
+        <h3>Total Recaudado</h3>
+        <p id="totalRecaudado">S/ --</p>
+      </div>
+
+      <div class="dashboard-card">
+        <h3>Pagos Completados</h3>
+        <p id="pagosCompletados">--</p>
+      </div>
+
+      <div class="dashboard-card">
+        <h3>Pagos Pendientes</h3>
+        <p id="pagosPendientes">--</p>
+      </div>
+    </div>
+
+    <!-- ===== Filtros ===== -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filtrarPagos('todos')">Todos</button>
+      <button class="filter-btn" onclick="filtrarPagos('Completado')">Completados</button>
+      <button class="filter-btn" onclick="filtrarPagos('Pendiente')">Pendientes</button>
+      <button class="filter-btn" onclick="filtrarPagos('Fallido')">Fallidos</button>
+    </div>
+
+    <!-- ===== Tabla de Pagos ===== -->
+    <div class="dashboard-section">
+      <h2>Historial de Pagos</h2>
+      <table class="styled-table" id="tablaPagos">
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Monto</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-          </tr>
+        <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Monto</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Juan Pérez</td>
-            <td>S/ 25.00</td>
-            <td>2025-10-12</td>
-            <td>Completado</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María López</td>
-            <td>S/ 30.00</td>
-            <td>2025-10-10</td>
-            <td>Pendiente</td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
-  </section>
+  </div>
+
+  <!-- ===== Script de Simulación ===== -->
+  <script>
+    const pagosSimulados = [
+      { id: "#P1001", usuario: "Carlos Ramírez", monto: 15.00, fecha: "2024-03-10", estado: "Completado" },
+      { id: "#P1002", usuario: "Sofía Mendoza", monto: 12.00, fecha: "2024-03-11", estado: "Pendiente" },
+      { id: "#P1003", usuario: "Diego López", monto: 10.00, fecha: "2024-03-12", estado: "Fallido" },
+      { id: "#P1004", usuario: "Ana Torres", monto: 20.00, fecha: "2024-03-13", estado: "Completado" },
+      { id: "#P1005", usuario: "Luis Pérez", monto: 8.00, fecha: "2024-03-14", estado: "Pendiente" }
+    ];
+
+    function renderPagos(pagos) {
+      const tbody = document.querySelector("#tablaPagos tbody");
+      tbody.innerHTML = "";
+
+      pagos.forEach(p => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${p.id}</td>
+          <td>${p.usuario}</td>
+          <td>S/ ${p.monto.toFixed(2)}</td>
+          <td>${p.fecha}</td>
+          <td><span class="estado ${p.estado.toLowerCase()}">${p.estado}</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      actualizarKPIs(pagos);
+    }
+
+    function filtrarPagos(estado) {
+      document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+
+      if (estado === "todos") {
+        renderPagos(pagosSimulados);
+      } else {
+        renderPagos(pagosSimulados.filter(p => p.estado === estado));
+      }
+    }
+
+    function actualizarKPIs(pagos) {
+      const total = pagosSimulados.reduce((sum, p) => sum + p.monto, 0);
+      const completados = pagosSimulados.filter(p => p.estado === "Completado").length;
+      const pendientes = pagosSimulados.filter(p => p.estado === "Pendiente").length;
+
+      document.getElementById("totalRecaudado").textContent = `S/ ${total.toFixed(2)}`;
+      document.getElementById("pagosCompletados").textContent = completados;
+      document.getElementById("pagosPendientes").textContent = pendientes;
+    }
+
+    renderPagos(pagosSimulados);
+  </script>
+</section>
 </body>
 </html>

@@ -5,26 +5,126 @@
       layout:decorate="~{layout}">
 
 <head>
+  <meta charset="UTF-8">
   <title>Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
   <section layout:fragment="content">
-    <h1 class="page-title">Dashboard</h1>
-    <div class="dashboard-cards">
-      <div class="card">
-        <h3>Total de Reservas</h3>
-        <p>120</p>
+    <div class="dashboard-container">
+      <h1 class="page-title">Panel de Control</h1>
+
+      <!-- ===== KPI Cards ===== -->
+      <div class="dashboard-cards">
+        <div class="dashboard-card">
+          <h3>Ocupación Actual</h3>
+          <p id="ocupacion">-- / --</p>
+          <span class="trend" id="ocupacionTrend"></span>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>Reservas Activas</h3>
+          <p id="reservas">--</p>
+          <span class="trend" id="reservasTrend"></span>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>Ingresos del Día</h3>
+          <p id="ingresos">--</p>
+          <span class="trend" id="ingresosTrend"></span>
+        </div>
       </div>
-      <div class="card">
-        <h3>Pagos Procesados</h3>
-        <p>S/ 2,400</p>
+
+      <!-- ===== Charts ===== -->
+      <div class="dashboard-charts-row">
+        <div class="dashboard-section half">
+          <h2>Ocupación por Hora</h2>
+          <canvas id="ocupacionHora"></canvas>
+        </div>
+
+        <div class="dashboard-section half">
+          <h2>Distribución de Ocupación</h2>
+          <canvas id="distribucion"></canvas>
+        </div>
       </div>
-      <div class="card">
-        <h3>Incidencias Reportadas</h3>
-        <p>5</p>
+
+      <!-- ===== Próximas funcionalidades ===== -->
+      <div class="dashboard-section">
+        <h2>Resumen de Actividad</h2>
+        <p>Aquí se mostrarán las últimas reservas, pagos y alertas del día.</p>
       </div>
     </div>
+
+    <!-- ===== Script con datos desde API simulada ===== -->
+    <script>
+      // Simular una API local
+      async function fetchDashboardData() {
+        return {
+          ocupacionActual: 80,
+          capacidadTotal: 200,
+          cambioOcupacion: "+5 desde ayer",
+          reservasActivas: 35,
+          cambioReservas: "+5 más que ayer",
+          ingresos: 2500,
+          cambioIngresos: "+15.3%",
+          ocupacionHora: [20, 15, 30, 28, 26, 24, 18],
+          distribucion: [80, 85, 35]
+        };
+      }
+
+      async function initDashboard() {
+        const data = await fetchDashboardData();
+
+        // Actualizar KPIs
+        document.getElementById("ocupacion").textContent = `${data.ocupacionActual} / ${data.capacidadTotal}`;
+        document.getElementById("ocupacionTrend").textContent = data.cambioOcupacion;
+        document.getElementById("reservas").textContent = data.reservasActivas;
+        document.getElementById("reservasTrend").textContent = data.cambioReservas;
+        document.getElementById("ingresos").textContent = `S/ ${data.ingresos.toLocaleString()}`;
+        document.getElementById("ingresosTrend").textContent = data.cambioIngresos;
+
+        // Gráfico de Ocupación por Hora
+        new Chart(document.getElementById("ocupacionHora"), {
+          type: 'bar',
+          data: {
+            labels: ['8 AM', '10 AM', '12 PM', '2 PM', '4 PM', '6 PM', '8 PM'],
+            datasets: [{
+              label: 'Vehículos',
+              data: data.ocupacionHora,
+              backgroundColor: '#3B82F6',
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+
+        // Gráfico de Distribución de Ocupación
+        new Chart(document.getElementById("distribucion"), {
+          type: 'doughnut',
+          data: {
+            labels: ['Ocupados', 'Libres', 'Reservados'],
+            datasets: [{
+              data: data.distribucion,
+              backgroundColor: ['#2563EB', '#D1D5DB', '#22C55E']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom' } }
+          }
+        });
+      }
+
+      initDashboard();
+    </script>
   </section>
 </body>
 </html>
